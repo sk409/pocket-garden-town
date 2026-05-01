@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Pocket Garden Town</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body, #root { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: "Zen Maru Gothic", "Quicksand", system-ui, sans-serif;
+    background: #EFE5D2;
+    overflow: hidden;
+  }
+  * { -webkit-tap-highlight-color: transparent; }
+
+  @keyframes cloudDrift {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(140vw); }
+  }
+  @keyframes bonusFloat {
+    0%   { transform: translateY(20px) scale(0.8); opacity: 0; }
+    20%  { transform: translateY(0) scale(1.05); opacity: 1; }
+    35%  { transform: translateY(-4px) scale(1); opacity: 1; }
+    80%  { transform: translateY(-10px) scale(1); opacity: 1; }
+    100% { transform: translateY(-30px) scale(0.95); opacity: 0; }
+  }
+  @keyframes tilePlop {
+    0%   { transform: translateY(-30px) scale(0.6); opacity: 0; }
+    60%  { transform: translateY(4px) scale(1.05); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  @keyframes unlockGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(212,144,107,0); }
+    50%      { box-shadow: 0 0 20px rgba(212,144,107,0.35); }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="palette.jsx"></script>
+<script type="text/babel" src="tiles.jsx"></script>
+<script type="text/babel" src="game.jsx"></script>
+<script type="text/babel" src="island.jsx"></script>
+<script type="text/babel" src="screens-title.jsx"></script>
+<script type="text/babel" src="screens-game.jsx"></script>
+<script type="text/babel" src="screens-result.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
