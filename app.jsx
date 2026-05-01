@@ -13,6 +13,24 @@ function App() {
 
   const [screen, setScreen] = React.useState('title'); // title | game | result
 
+  // Fit the fixed-size 390×844 frame into the visible viewport so nothing is clipped
+  // by mobile browser chrome (address bar / tabs).
+  const [fit, setFit] = React.useState(1);
+  React.useLayoutEffect(() => {
+    const compute = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      setFit(Math.min(1, w / 390, h / 844));
+    };
+    compute();
+    window.addEventListener('resize', compute);
+    window.addEventListener('orientationchange', compute);
+    return () => {
+      window.removeEventListener('resize', compute);
+      window.removeEventListener('orientationchange', compute);
+    };
+  }, []);
+
   // persistent best score
   const [bestScore, setBestScore] = React.useState(() => {
     return Number(localStorage.getItem('pgt_best') || 220);
@@ -188,7 +206,7 @@ function App() {
 
   return (
     <div style={{
-      width: '100vw', height: '100vh',
+      width: '100%', height: '100%',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       background: t.showFrame
         ? `radial-gradient(ellipse at top, ${palette.cream} 0%, ${palette.parchment} 100%)`
@@ -197,13 +215,21 @@ function App() {
       position: 'relative',
     }} data-screen-label="Pocket Garden Town">
       {t.showFrame ? (
-        <div style={{ position: 'relative' }}>
+        <div style={{
+          position: 'relative',
+          transform: `scale(${fit})`,
+          transformOrigin: 'center center',
+        }}>
           <IOSDevice width={390} height={844}>
             {content}
           </IOSDevice>
         </div>
       ) : (
-        <div style={{ width: 390, height: 844, position: 'relative', overflow: 'hidden', borderRadius: 0 }}>
+        <div style={{
+          width: 390, height: 844, position: 'relative', overflow: 'hidden', borderRadius: 0,
+          transform: `scale(${fit})`,
+          transformOrigin: 'center center',
+        }}>
           {content}
         </div>
       )}
