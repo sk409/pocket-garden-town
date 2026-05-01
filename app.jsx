@@ -3,7 +3,6 @@
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "lighting": "day",
   "motion": "moderate",
-  "showFrame": true,
   "ambientSound": false
 }/*EDITMODE-END*/;
 
@@ -208,31 +207,17 @@ function App() {
     <div style={{
       width: '100%', height: '100%',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: t.showFrame
-        ? `radial-gradient(ellipse at top, ${palette.cream} 0%, ${palette.parchment} 100%)`
-        : palette.skySolid,
+      background: palette.skySolid,
       overflow: 'hidden',
       position: 'relative',
     }} data-screen-label="Pocket Garden Town">
-      {t.showFrame ? (
-        <div style={{
-          position: 'relative',
-          transform: `scale(${fit})`,
-          transformOrigin: 'center center',
-        }}>
-          <IOSDevice width={390} height={844}>
-            {content}
-          </IOSDevice>
-        </div>
-      ) : (
-        <div style={{
-          width: 390, height: 844, position: 'relative', overflow: 'hidden', borderRadius: 0,
-          transform: `scale(${fit})`,
-          transformOrigin: 'center center',
-        }}>
-          {content}
-        </div>
-      )}
+      <div style={{
+        width: 390, height: 844, position: 'relative', overflow: 'hidden', borderRadius: 0,
+        transform: `scale(${fit})`,
+        transformOrigin: 'center center',
+      }}>
+        {content}
+      </div>
 
       <TweaksPanel title="Tweaks">
         <TweakSection label="Visuals" />
@@ -255,12 +240,6 @@ function App() {
             { value: 'lively', label: 'いきいき' },
           ]}
           onChange={(v) => setTweak('motion', v)}
-        />
-        <TweakSection label="Display" />
-        <TweakToggle
-          label="iPhoneフレーム"
-          value={t.showFrame}
-          onChange={(v) => setTweak('showFrame', v)}
         />
         <TweakSection label="Navigate" />
         <TweakRadio
